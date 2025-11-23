@@ -16,7 +16,7 @@ def run():
     print("Initializing Simulation...")
     
     # Setup
-    logger = Logger(log_dir="results/logs")
+    logger = Logger(log_dir="../../results/logs")
     env = MarketEnvironment(initial_price=100.0)
     
     # Initialize Agents
@@ -70,11 +70,11 @@ def run():
     print("Done. Results saved in /results.")
 
 def generate_plots():
-    os.makedirs("results/charts", exist_ok=True)
+    os.makedirs("../../results/charts", exist_ok=True)
     
     # Load Data
-    prices_df = pd.read_csv("results/logs/prices.csv")
-    pnl_df = pd.read_csv("results/logs/pnl.csv")
+    prices_df = pd.read_csv("../../results/logs/prices.csv")
+    pnl_df = pd.read_csv("../../results/logs/pnl.csv")
     
     # 1. Price History
     plt.figure(figsize=(10, 6))
@@ -84,7 +84,7 @@ def generate_plots():
     plt.ylabel("Price")
     plt.legend()
     plt.grid(True)
-    plt.savefig("results/charts/price_history.png")
+    plt.savefig("../../results/charts/price_history.png")
     plt.close()
 
     # 2. Agent PnL
@@ -100,7 +100,7 @@ def generate_plots():
     plt.ylabel("Profit/Loss ($)")
     plt.legend()
     plt.grid(True)
-    plt.savefig("results/charts/agent_pnl.png")
+    plt.savefig("../../results/charts/agent_pnl.png")
     plt.close()
 
     # 3. Inventory
@@ -114,7 +114,7 @@ def generate_plots():
     plt.ylabel("Inventory (Units)")
     plt.legend()
     plt.grid(True)
-    plt.savefig("results/charts/agent_inventory.png")
+    plt.savefig("../../results/charts/agent_inventory.png")
     plt.close()
 
 if __name__ == "__main__":
