@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autonomous Trading Simulator</title>
+    <style>
+        :root {
+            --dark: #1a1a2e;
+            --light: #e94560;
+            --gray: #16213e;
+            --text: #eaeaea;
+        }
+
+        body {
+            background-color: var(--dark);
+            color: var(--text);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 50px 0;
+            border-bottom: 1px solid var(--gray);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 3em;
+            color: var(--light);
+        }
+
+        .subtitle {
+            color: #888;
+            margin-top: 10px;
+            font-size: 1.2em;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .card {
+            background: var(--gray);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .card h3 {
+            color: var(--light);
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+
+        .chart-container {
+            background: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .chart-container img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .chart-caption {
+            color: #333;
+            font-weight: bold;
+            margin-top: 5px;
+            display: block;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            font-size: 0.85em;
+            color: #ccc;
+        }
+
+        th,
+        td {
+            border: 1px solid #444;
+            padding: 8px;
+            text-align: right;
+        }
+
+        th {
+            background: #0f3460;
+            text-align: center;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+
+        .status-green {
+            background: rgba(0, 255, 0, 0.2);
+            color: #0f0;
+        }
+
+        .status-red {
+            background: rgba(255, 0, 0, 0.2);
+            color: #f00;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: var(--light);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Multi-Agent Trading Sim</h1>
+            <div class="subtitle">Reinforcement Learning & Market Microstructure Analysis</div>
+        </header>
+
+        <div class="grid">
+            <div class="card">
+                <h3>🤖 Market Maker (MM_01)</h3>
+                <p>Provides liquidity by placing limit orders on both sides.</p>
+                <ul>
+                    <li><strong>PnL:</strong> <span class="status-green">+$250 to +$370</span></li>
+                    <li><strong>Behavior:</strong> Inventory oscillates around zero. Captures spread.</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>📈 Trend Follower (Trend_01)</h3>
+                <p>Momentum strategy based on Moving Averages.</p>
+                <ul>
+                    <li><strong>PnL:</strong> <span class="status-red">-$200 to -$700</span></li>
+                    <li><strong>Behavior:</strong> Takes large directional bets. High volatility.</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>⚖️ Arbitrageur (Arb_01)</h3>
+                <p>Statistical arbitrage exploiting fair value deviations.</p>
+                <ul>
+                    <li><strong>PnL:</strong> <span class="status-green">+$200 to +$300</span></li>
+                    <li><strong>Behavior:</strong> Consistently profitable. Mean reverting.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card" style="margin-top: 40px;">
+            <h3>📄 Simulation Logs (Data Preview)</h3>
+            <p>A snapshot of the raw transaction logs generated during the simulation (from
+                <code>results/logs/pnl.csv</code>).</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Step</th>
+                        <th>Agent ID</th>
+                        <th>Inventory</th>
+                        <th>Cash</th>
+                        <th>Total Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>3</td>
+                        <td>MM_01</td>
+                        <td>10</td>
+                        <td>99,018.1</td>
+                        <td>100,001.6</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Trend_01</td>
+                        <td>-10</td>
+                        <td>100,981.9</td>
+                        <td>99,998.4</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Arb_01</td>
+                        <td>-10</td>
+                        <td>100,981.9</td>
+                        <td>99,998.4</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>MM_01</td>
+                        <td>20</td>
+                        <td>98,036.1</td>
+                        <td>100,010.9</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Trend_01</td>
+                        <td>-20</td>
+                        <td>101,963.9</td>
+                        <td>99,989.1</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="grid">
+            <div class="chart-container">
+                <span class="chart-caption">Cumulative PnL Over Time</span>
+                <img src="results/charts/agent_pnl.png" alt="Agent PnL Graph">
+            </div>
+            <div class="chart-container">
+                <span class="chart-caption">Agent Inventory Management</span>
+                <img src="results/charts/agent_inventory.png" alt="Agent Inventory Graph">
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-bottom: 50px;">
+            <a href="https://github.com/renoldthomas/multi-agent-autonomous-trading-simulator" class="btn">View Source
+                on GitHub</a>
+        </div>
+    </div>
+
+</body>
+
+</html>
